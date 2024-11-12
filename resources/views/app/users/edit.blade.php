@@ -3,7 +3,7 @@
 @section('title', 'users')
 
 @section('actions')
-<a href="{{ request()->back() }}" class="btn btn-sm fw-bold btn-secondary">
+<a href="{{ url()->previous() }}" class="btn btn-sm fw-bold btn-secondary">
     Back
 </a>
 @endsection
