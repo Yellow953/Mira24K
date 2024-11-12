@@ -32,6 +32,20 @@
                             value="{{ old('email') }}" required />
                     </div>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="form-group mt-5">
+                        <label class="form-label">Permissions</label>
+                        @foreach($permissions as $permission)
+                        <label>
+                            <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{
+                                isset($userPermissions) && in_array($permission->name, $userPermissions) ? 'checked' :
+                            '' }}>
+                            {{ ucfirst($permission->name) }}
+                        </label>
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
             <div class="row">

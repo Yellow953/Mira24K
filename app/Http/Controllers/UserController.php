@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -20,7 +21,8 @@ class UserController extends Controller
 
     public function new()
     {
-        return view('app.users.new');
+        $permissions = Permission::all();
+        return view('app.users.new', compact('permissions'));
     }
 
     public function create(Request $request)
@@ -47,7 +49,10 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $data = compact('user');
+        $permissions = Permission::all();
+        $userPermissions = $user->permissions->pluck('name')->toArray();
+
+        $data = compact('user', 'permissions', 'userPermissions');
         return view('app.users.edit', $data);
     }
 

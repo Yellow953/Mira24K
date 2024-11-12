@@ -209,7 +209,7 @@ $user = auth()->user();
                     <div class="cursor-pointer symbol symbol-30px symbol-md-40px"
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
-                        <img src="{{ asset('assets/images/default_profile.png') }}" alt="user" />
+                        <img src="{{ asset('assets/images/default_profile.png') }}" class="bg-white p-1" alt="user" />
                     </div>
                     <!--begin::User account menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -219,7 +219,7 @@ $user = auth()->user();
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{ asset('assets/images/default_profile.png') }}" />
+                                    <img alt="Logo" src="{{ asset('assets/images/default_profile.png') }}" class="bg-white p-1"/>
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->

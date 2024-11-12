@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -15,7 +15,8 @@ class AppController extends Controller
 
     public function index()
     {
-        return view('app.index');
+        $categories = Category::select('id', 'name', 'image')->where('type', 'parts')->get();
+        return view('app.index', compact('categories'));
     }
 
     public function custom_logout()
