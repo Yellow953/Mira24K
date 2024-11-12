@@ -1,5 +1,7 @@
 @extends('app.layouts.app')
 
+@section('title', 'app')
+
 @section('content')
 <!--begin::Layout-->
 <div class="d-flex flex-column flex-xl-row">

@@ -57,11 +57,79 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
+                    <a class="menu-link {{ request()->routeIs('parts*') ? 'active' : '' }}" href="{{ route('parts') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-gear-wide"></i>
+                        </span>
+                        <span class="menu-title">Parts</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link {{ request()->routeIs('jewelery_models*') ? 'active' : '' }}"
+                        href="{{ route('jewelery_models') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-brush-fill"></i>
+                        </span>
+                        <span class="menu-title">Models</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link {{ request()->routeIs('products*') ? 'active' : '' }}"
+                        href="{{ route('products') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-gem"></i>
+                        </span>
+                        <span class="menu-title">Products</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link {{ request()->routeIs('resellers*') ? 'active' : '' }}"
+                        href="{{ route('resellers') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-shop"></i>
+                        </span>
+                        <span class="menu-title">Resellers</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+                <div class="menu-item">
+                    <!--begin:Menu link-->
                     <a class="menu-link {{ request()->routeIs('users*') ? 'active' : '' }}" href="{{ route('users') }}">
                         <span class="menu-icon">
                             <i class="bi bi-person-fill"></i>
                         </span>
                         <span class="menu-title">Users</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+
+                <!--begin:Menu item-->
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link {{ request()->routeIs('logs*') ? 'active' : '' }}" href="{{ route('logs') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-receipt"></i>
+                        </span>
+                        <span class="menu-title">Logs</span>
                     </a>
                     <!--end:Menu link-->
                 </div>
