@@ -32,6 +32,35 @@
                             value="{{ $user->email }}" required />
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group my-10">
+                        <h3>Permissions</h3>
+
+                        @php
+                        $groupedPermissions = $permissions->groupBy(function($permission) {
+                        return explode('.', $permission->name)[0];
+                        });
+                        @endphp
+
+                        <div class="row">
+                            @foreach($groupedPermissions as $category => $categoryPermissions)
+                            <div class="col-md-6 my-3">
+                                <h6 class="my-3">{{ ucfirst($category) }}</h6>
+                                <div class="d-flex gap-2">
+                                    @foreach($categoryPermissions as $permission)
+                                    <label class="mx-1">
+                                        <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{
+                                            in_array($permission->name, $userPermissions) ? 'checked' : '' }}>
+                                        {{ ucfirst(explode('.', $permission->name)[1]) }}
+                                    </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="card-footer pt-0">

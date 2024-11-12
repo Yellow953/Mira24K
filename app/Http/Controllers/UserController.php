@@ -33,11 +33,15 @@ class UserController extends Controller
             'password' => 'required|max:255|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => trim($request->name),
             'email' => trim($request->email),
             'password' => Hash::make($request->password),
         ]);
+
+        if ($request->has('permissions')) {
+            $user->syncPermissions($request->permissions);
+        }
 
         $text = ucwords(auth()->user()->name) . " created User : " . $request->name . ", datetime :   " . now();
         Log::create([
@@ -50,7 +54,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $permissions = Permission::all();
-        $userPermissions = $user->permissions->pluck('name')->toArray();
+        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray();
 
         $data = compact('user', 'permissions', 'userPermissions');
         return view('app.users.edit', $data);
@@ -68,6 +72,12 @@ class UserController extends Controller
             'email' => trim($request->email),
         ]);
 
+        if ($request->has('permissions')) {
+            $user->syncPermissions($request->permissions);
+        } else {
+            $user->syncPermissions([]);
+        }
+
         if ($user->name != trim($request->name)) {
             $text = ucwords(auth()->user()->name) . ' updated User ' . $user->name . " to " . $request->name . ", datetime :   " . now();
         } else {
@@ -83,18 +93,14 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user->can_delete()) {
-            $text = ucwords(auth()->user()->name) . " deleted user : " . $user->name . ", datetime :   " . now();
+        $text = ucwords(auth()->user()->name) . " deleted user : " . $user->name . ", datetime :   " . now();
 
-            Log::create([
-                'text' => $text,
-            ]);
-            $user->delete();
+        Log::create([
+            'text' => $text,
+        ]);
+        $user->delete();
 
-            return redirect()->back()->with('error', 'User deleted successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Unothorized Access...');
-        }
+        return redirect()->back()->with('error', 'User deleted successfully!');
     }
 
     public function export()
