@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+
             $table->string('name');
             $table->string('size');
             $table->double('gr_pcs');
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->bigInteger("reseller_id")->unsigned();
             $table->string('reseller_barcode');
             $table->string('image');
-            $table->timestamps();
+
 
             // stones
             $table->boolean('faceted')->nullable();
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->double('thickness')->nullable();
             $table->double('gr_dm')->nullable();
 
+            $table->timestamps();
             $table->foreign('reseller_id')->references('id')->on('resellers');
         });
     }
