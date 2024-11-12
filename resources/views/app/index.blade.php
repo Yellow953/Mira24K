@@ -1721,4 +1721,7 @@
     <!--end::Sidebar-->
 </div>
 <!--end::Layout-->
+
+<script src="{{ asset('assets/js/custom/pages/general/pos.js') }}"></script>
+
 @endsection

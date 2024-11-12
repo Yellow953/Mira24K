@@ -32,15 +32,7 @@
         <!--end::Page title-->
         <!--begin::Actions-->
         <div class="d-flex align-items-center gap-2 gap-lg-3">
-            <!--begin::Secondary button-->
-            <a href="../../demo1/dist/apps/ecommerce/sales/listing.html"
-                class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary">Recent
-                Orders</a>
-            <!--end::Secondary button-->
-            <!--begin::Primary button-->
-            <a href="../../demo1/dist/apps/ecommerce/catalog/add-product.html"
-                class="btn btn-sm fw-bold btn-primary">New Product</a>
-            <!--end::Primary button-->
+            @yield('actions')
         </div>
         <!--end::Actions-->
     </div>

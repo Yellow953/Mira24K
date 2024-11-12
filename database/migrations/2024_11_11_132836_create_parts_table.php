@@ -35,6 +35,7 @@ return new class extends Migration
             $table->double('gr_dm')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('reseller_id')->references('id')->on('resellers');
         });
     }

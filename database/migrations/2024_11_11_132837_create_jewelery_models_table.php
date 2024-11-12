@@ -8,9 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('jewelery_models', function (Blueprint $table) {
             $table->id();
-            $table->text('text');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -18,6 +17,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('jewelery_models');
     }
 };

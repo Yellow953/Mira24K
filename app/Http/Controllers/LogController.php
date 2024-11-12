@@ -13,7 +13,7 @@ class LogController extends Controller
     {
         $logs = Log::select('text', 'created_at')->filter()->orderBy('created_at', 'desc')->paginate(25);
 
-        return view('logs.index', compact('logs'));
+        return view('app.logs.index', compact('logs'));
     }
 
     public function export()

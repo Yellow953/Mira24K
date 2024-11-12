@@ -15,12 +15,12 @@ class UserController extends Controller
     {
         $users = User::select('id', 'name', 'email')->filter()->orderBy('id', 'desc')->paginate(25);
 
-        return view('users.index', compact('users'));
+        return view('app.users.index', compact('users'));
     }
 
     public function new()
     {
-        return view('users.new');
+        return view('app.users.new');
     }
 
     public function create(Request $request)
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $data = compact('user');
-        return view('users.edit', $data);
+        return view('app.users.edit', $data);
     }
 
     public function update(User $user, Request $request)

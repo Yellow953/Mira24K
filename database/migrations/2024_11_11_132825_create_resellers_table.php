@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('contact_person');
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
