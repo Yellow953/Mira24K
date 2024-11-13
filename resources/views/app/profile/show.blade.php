@@ -18,9 +18,6 @@
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                                 <img src="{{ asset('assets/images/default_profile.png') }}" alt="profile image" />
-                                <div
-                                    class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px">
-                                </div>
                             </div>
                         </div>
                         <!--end::Pic-->
@@ -58,7 +55,8 @@
                             </div>
                             <!--end::Title-->
 
-                            {{-- <!--begin::Stats-->
+                            {{--
+                            <!--begin::Stats-->
                             <div class="d-flex flex-wrap flex-stack">
                                 <!--begin::Wrapper-->
                                 <div class="d-flex flex-column flex-grow-1 pe-8">
@@ -85,7 +83,7 @@
                                         <!--end::Stat-->
                                     </div>
                                     <!--end::Stats-->
-                                */
+                                    */
                                 </div>
                                 <!--end::Wrapper-->
                             </div>
@@ -120,11 +118,11 @@
                         <h4 class="card-title mb-4">User Overview</h4>
 
                         <div class="user-info">
-                            <div class="user-info-item d-flex justify-content-between align-items-center">
+                            <div class="user-info-item d-flex justify-content-between align-items-center my-3">
                                 <span class="fw-bold">Name:</span>
-                                <span>{{ $user->name }}</span>
+                                <span>{{ ucwords($user->name) }}</span>
                             </div>
-                            <div class="user-info-item d-flex justify-content-between align-items-center">
+                            <div class="user-info-item d-flex justify-content-between align-items-center my-3">
                                 <span class="fw-bold">Email:</span>
                                 <span>{{ $user->email }}</span>
                             </div>
@@ -137,15 +135,15 @@
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data"
                             class="form">
                             @csrf
-                            <div class="row mb-3">
-                                <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12 my-3">
                                     <div class="form-group">
                                         <label class="required form-label">Name</label>
                                         <input type="text" class="form-control" name="name" value="{{ $user->name }}"
                                             required />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12 my-3">
                                     <div class="form-group">
                                         <label class="required form-label">Email</label>
                                         <input type="email" class="form-control" name="email" value="{{ $user->email }}"
@@ -154,7 +152,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 d-flex justify-content-end">
+                                <div class="col-12 d-flex justify-content-end my-3">
                                     <button type="submit" class="btn btn-primary">Update Profile</button>
                                 </div>
                             </div>
@@ -167,14 +165,14 @@
                         <form action="{{ route('profile.save_password') }}" method="POST" enctype="multipart/form-data"
                             class="form">
                             @csrf
-                            <div class="row mb-3">
-                                <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 my-3">
                                     <div class="form-group">
                                         <label class="required form-label">New Password</label>
                                         <input type="password" class="form-control" name="new_password" required />
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 my-3">
                                     <div class="form-group">
                                         <label class="required form-label">Confirm Password</label>
                                         <input type="password" class="form-control" name="new_password_confirmation"
@@ -183,7 +181,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 d-flex justify-content-end">
+                                <div class="col-12 d-flex justify-content-end my-3">
                                     <button type="submit" class="btn btn-primary">Change Password</button>
                                 </div>
                             </div>

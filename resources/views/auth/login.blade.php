@@ -14,6 +14,7 @@
     <!--begin::Heading-->
     <!--begin::Input group=-->
     <div class="fv-row mb-8">
+        <label for="email" class="form-label">Email</label>
         <!--begin::Email-->
         <input id="email" type="email" class="form-control bg-transparent @error('email') is-invalid @enderror"
             name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -27,6 +28,7 @@
     </div>
     <!--end::Input group=-->
     <div class="fv-row mb-3">
+        <label for="password" class="form-label">Password</label>
         <!--begin::Password-->
         <input id="password" type="password" class="form-control bg-transparent @error('password') is-invalid @enderror"
             name="password" required autocomplete="current-password">
