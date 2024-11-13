@@ -100,4 +100,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/custom_logout', [AppController::class, 'custom_logout'])->name('custom_logout');
 });
 
+Route::get('/get_gold_price', [App\Http\Controllers\AppController::class, 'get_gold_price'])->name('get_gold_price');
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

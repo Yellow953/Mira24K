@@ -1,33 +1,36 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Jobs;
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use App\Models\General;
+use App\Models\Log;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Foundation\Queue\Queueable;
 
-class AppController extends Controller
+class UpdateGoldPriceJob implements ShouldQueue
 {
-    public function __construct()
+    use Queueable, Dispatchable;
+
+    public function __construct() {}
+
+    public function handle(): void
     {
-        // $this->middleware('admin');
+        $gold_price = $this->get_gold_price();
+
+        if ($gold_price && is_numeric($gold_price)) {
+            General::updateOrCreate(
+                ['title' => 'gold_price'],
+                ['value' => $gold_price]
+            );
+
+            Log::create(['text' => "Gold Price Updated to " . $gold_price . ", datetime:" . now()]);
+        } else {
+            Log::create(['text' => "Couldn't update Gold Price, datetime:" . now()]);
+        }
     }
 
-    public function index()
-    {
-        $categories = Category::select('id', 'name', 'image')->where('type', 'parts')->get();
-        return view('app.index', compact('categories'));
-    }
-
-    public function custom_logout()
-    {
-        Session::flush();
-        Auth::logout();
-
-        return redirect('login');
-    }
-
-    public function get_gold_price()
+    private function get_gold_price()
     {
         $apiKey = "goldapi-1vro19m3ft72am-io";
         $symbol = "XAU";
