@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\JeweleryModelController;
+use App\Http\Controllers\JewelryModelController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\ProductController;
@@ -53,15 +53,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [PartController::class, 'index'])->name('parts');
         });
 
-        // Jewelery Models
-        Route::prefix('jewelery_models')->group(function () {
-            Route::get('/export', [JeweleryModelController::class, 'export'])->name('jewelery_models.export');
-            Route::get('/new', [JeweleryModelController::class, 'new'])->name('jewelery_models.new');
-            Route::post('/create', [JeweleryModelController::class, 'create'])->name('jewelery_models.create');
-            Route::get('/edit/{jewelery_model}', [JeweleryModelController::class, 'edit'])->name('jewelery_models.edit');
-            Route::post('/update/{jewelery_model}', [JeweleryModelController::class, 'update'])->name('jewelery_models.update');
-            Route::get('/delete/{jewelery_model}', [JeweleryModelController::class, 'destroy'])->name('jewelery_models.destroy');
-            Route::get('/', [JeweleryModelController::class, 'index'])->name('jewelery_models');
+        // Jewelry Models
+        Route::prefix('jewelry_models')->group(function () {
+            Route::get('/export', [JewelryModelController::class, 'export'])->name('jewelry_models.export');
+            Route::get('/new', [JewelryModelController::class, 'new'])->name('jewelry_models.new');
+            Route::post('/create', [JewelryModelController::class, 'create'])->name('jewelry_models.create');
+            Route::get('/edit/{jewelry_model}', [JewelryModelController::class, 'edit'])->name('jewelry_models.edit');
+            Route::post('/update/{jewelry_model}', [JewelryModelController::class, 'update'])->name('jewelry_models.update');
+            Route::get('/delete/{jewelry_model}', [JewelryModelController::class, 'destroy'])->name('jewelry_models.destroy');
+            Route::get('/', [JewelryModelController::class, 'index'])->name('jewelry_models');
         });
 
         // Products

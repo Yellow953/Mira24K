@@ -4,4 +4,4 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class JeweleryModelController extends Controller {}
+class JewelryModelController extends Controller {}

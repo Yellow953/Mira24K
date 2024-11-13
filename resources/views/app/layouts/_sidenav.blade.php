@@ -70,8 +70,8 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link {{ request()->routeIs('jewelery_models*') ? 'active' : '' }}"
-                        href="{{ route('jewelery_models') }}">
+                    <a class="menu-link {{ request()->routeIs('jewelry_models*') ? 'active' : '' }}"
+                        href="{{ route('jewelry_models') }}">
                         <span class="menu-icon">
                             <i class="bi bi-brush-fill"></i>
                         </span>

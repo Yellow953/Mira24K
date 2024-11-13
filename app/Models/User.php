@@ -32,6 +32,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function jewelry_models()
+    {
+        return $this->hasMany(JewelryModel::class);
+    }
+
     // Filter
     public function scopeFilter($q)
     {

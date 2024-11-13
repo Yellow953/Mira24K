@@ -5,19 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class JewelryModel extends Model
 {
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function items()
+    {
+        return $this->hasMany(ModelPart::class, 'jewelry_model_id');
+    }
 
     public function products()
     {
         return $this->hasMany(Product::class);
     }
 
-    public function parts()
+    public function user()
     {
-        return $this->hasMany(Part::class);
+        return $this->belongsTo(User::class);
     }
 }

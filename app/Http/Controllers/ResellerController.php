@@ -10,25 +10,18 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ResellerController extends Controller
 {
-    // Display a paginated listing of resellers
     public function index()
     {
-        $contactPersons = Reseller::select('contact_person')->distinct()->pluck('contact_person');
-        $resellers = Reseller::select('id', 'name', 'address', 'gsm', 'phone', 'email', 'contact_person')
-        ->filter()
-        ->orderBy('id', 'desc')
-        ->paginate(25);
+        $resellers = Reseller::select('id', 'name', 'address', 'gsm', 'phone', 'email', 'contact_person')->filter()->orderBy('id', 'desc')->paginate(25);
 
-        return view('app.resellers.index', compact('resellers','contactPersons'));
+        return view('app.resellers.index', compact('resellers'));
     }
 
-    // Show form to create a new reseller
     public function new()
     {
         return view('app.resellers.new');
     }
 
-    // Store a new reseller
     public function create(Request $request)
     {
         $request->validate([
@@ -41,8 +34,14 @@ class ResellerController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $reseller = Reseller::create($request->only([
-            'name', 'address', 'gsm', 'phone', 'email', 'contact_person', 'notes'
+        Reseller::create($request->only([
+            'name',
+            'address',
+            'gsm',
+            'phone',
+            'email',
+            'contact_person',
+            'notes'
         ]));
 
         $text = auth()->user()->name . " created Reseller : " . $request->name . ", datetime : " . now();
@@ -51,13 +50,11 @@ class ResellerController extends Controller
         return redirect()->route('resellers')->with('success', 'Reseller created successfully!');
     }
 
-    // Show form to edit an existing reseller
     public function edit(Reseller $reseller)
     {
         return view('app.resellers.edit', compact('reseller'));
     }
 
-    // Update an existing reseller
     public function update(Reseller $reseller, Request $request)
     {
         $request->validate([
@@ -72,7 +69,13 @@ class ResellerController extends Controller
 
         $originalName = $reseller->name;
         $reseller->update($request->only([
-            'name', 'address', 'gsm', 'phone', 'email', 'contact_person', 'notes'
+            'name',
+            'address',
+            'gsm',
+            'phone',
+            'email',
+            'contact_person',
+            'notes'
         ]));
 
         $text = auth()->user()->name . ' updated Reseller ' . $originalName . ' to ' . $request->name . ", datetime : " . now();
@@ -81,7 +84,6 @@ class ResellerController extends Controller
         return redirect()->route('resellers')->with('success', 'Reseller updated successfully!');
     }
 
-    // Delete a reseller
     public function destroy(Reseller $reseller)
     {
         $text = auth()->user()->name . " deleted Reseller : " . $reseller->name . ", datetime : " . now();

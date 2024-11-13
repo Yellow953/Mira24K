@@ -10,11 +10,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("jewelery_model_id")->unsigned();
+            $table->bigInteger("jewelry_model_id")->unsigned();
             $table->bigInteger("category_id")->unsigned();
             $table->string('title');
+            $table->string('mcode');
+            $table->double('karat');
+            $table->double('weight');
             $table->double('price');
-            $table->double('compare_price');
+            $table->double('compare_price')->nullable();
             $table->text('description')->nullable();
 
             $table->string('image');
@@ -24,7 +27,7 @@ return new class extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('jewelery_model_id')->references('id')->on('jewelery_models');
+            $table->foreign('jewelry_model_id')->references('id')->on('jewelry_models');
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }
