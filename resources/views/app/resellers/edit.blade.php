@@ -1,6 +1,6 @@
 @extends('app.layouts.app')
 
-@section('title', 'users')
+@section('title', 'resellers')
 
 @section('actions')
 <a href="{{ url()->previous() }}" class="btn btn-sm fw-bold btn-secondary">
@@ -10,30 +10,70 @@
 
 @section('content')
 <div class="card">
-    <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" class="form">
+    <form action="{{ route('resellers.update', $reseller->id) }}" method="POST" enctype="multipart/form-data" class="form">
         @csrf
 
         <div class="card-head pt-10">
-            <h1 class="text-center text-primary">Edit User</h1>
+            <h1 class="text-center text-primary">Edit Reseller</h1>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group mt-5">
                         <label class="required form-label">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter Name..."
-                            value="{{ $user->name }}" required />
+                        <input type="text" class="form-control" name="name" placeholder="Enter Reseller Name..."
+                            value="{{ $reseller->name }}" required />
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group mt-5">
                         <label class="required form-label">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Enter Email..."
-                            value="{{ $user->email }}" required />
+                            value="{{ $reseller->email }}" required />
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mt-5">
+                        <label class="required form-label">Address</label>
+                        <input type="text" class="form-control" name="address" placeholder="Enter Address..."
+                            value="{{ $reseller->address }}" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mt-5">
+                        <label class="form-label">GSM</label>
+                        <input type="text" class="form-control" name="gsm" placeholder="Enter GSM..."
+                            value="{{ $reseller->gsm }}" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mt-5">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="phone" placeholder="Enter Phone..."
+                            value="{{ $reseller->phone }}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mt-5">
+                        <label class="required form-label">Contact Person</label>
+                        <input type="text" class="form-control" name="contact_person" placeholder="Enter Contact Person..."
+                            value="{{ $reseller->contact_person }}" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-5">
+                <label class="form-label">Notes</label>
+                <textarea class="form-control" name="notes" rows="4" placeholder="Enter any additional notes...">{{ $reseller->notes }}</textarea>
+            </div>
         </div>
+
         <div class="card-footer pt-0">
             <div class="d-flex align-items-center justify-content-around">
                 <button type="reset" class="btn btn-danger clear-btn">Clear</button>
