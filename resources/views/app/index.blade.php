@@ -21,7 +21,7 @@
                             <li class="nav-item mb-3 me-0">
                                 <a class="nav-link nav-link-border-solid btn btn-outline btn-active-color-primary flex-column flex-stack py-5 page-bg {{ $loop->first ? 'active show' : '' }}"
                                     data-bs-toggle="pill" href="#kt_pos_food_content_{{ $category->id }}"
-                                    style="width: 150px;height: 150px">
+                                    style="width: 125px;height: 125px">
                                     <div class="nav-icon mb-3">
                                         <img src="{{ asset($category->image) }}" class="w-50px"
                                             alt="{{ $category->name }}" />
@@ -39,32 +39,31 @@
                             <div class="tab-pane fade {{ $loop->first ? 'active show' : '' }}"
                                 id="kt_pos_food_content_{{ $category->id }}">
                                 <div class="d-flex flex-wrap d-grid gap-3">
-                                    {{-- @forelse ($category->products as $product)
+                                    @forelse ($category->parts as $part)
                                     <div class="card card-flush flex-row-fluid p-0 pb-5 mw-100 border-custom product-item"
-                                        data-product-id="{{ $product->id }}">
+                                        data-product-id="{{ $part->id }}">
                                         <div class="card-body text-center">
-                                            <img src="{{ asset($product->image) }}"
-                                                class="rounded-3 mb-4 w-150px h-150px" alt="{{ $product->name }}" />
+                                            <img src="{{ asset($part->image) }}" class="rounded-3 mb-4 w-150px h-150px"
+                                                alt="{{ $part->name }}" />
                                             <div class="mb-2">
                                                 <div class="text-center">
                                                     <span
                                                         class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">{{
-                                                        ucwords($product->name) }}</span>
+                                                        ucwords($part->name) }}</span>
                                                 </div>
                                             </div>
                                             <span class="text-success text-end fw-bold fs-1">{{
-                                                number_format($product->price * $currency->rate, 2) }}
-                                                {{ $currency->symbol }}</span>
+                                                number_format($part->price, 2) }}</span>
                                         </div>
                                     </div>
-                                    @empty --}}
+                                    @empty
                                     <div class="card card-flush flex-row-fluid p-0 mw-100 border-custom">
                                         <div class="card-body text-center my-2">
                                             <span class="fw-bold text-gray-800 fs-3 fs-xl-1">No Parts In This
                                                 Category...</span>
                                         </div>
                                     </div>
-                                    {{-- @endforelse --}}
+                                    @endforelse
                                 </div>
                             </div>
                             @endforeach
@@ -78,15 +77,12 @@
                 <form action="#" method="post" enctype="multipart/form-data" id="kt_pos_form">
                     @csrf
                     <input type="hidden" name="order_items" value="">
-                    <input type="hidden" name="total" value="0">
-                    <input type="hidden" name="tax" value="0">
-                    <input type="hidden" name="discount" value="0">
-                    <input type="hidden" name="grand_total" value="0">
-                    <input type="text" id="barcode_input" class="form-control d-none">
+                    <input type="hidden" name="total_price" value="0">
+                    <input type="hidden" name="total_weight" value="0">
 
                     <div class="card card-flush bg-body" id="kt_pos_form">
                         <div class="card-header px-4 pt-5">
-                            <h3 class="card-title fw-bold text-gray-800 fs-2qx">Current Order</h3>
+                            <h3 class="card-title fw-bold text-gray-800 fs-2qx">Create Model</h3>
                             <div class="card-toolbar">
                                 <a href="#" class="btn btn-danger fs-4 fw-bold py-4" id="clear_all">Clear All</a>
                             </div>
@@ -106,30 +102,24 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="d-flex flex-stack bg-success rounded-3 p-6 mb-11">
-                                <div class="fs-6 fw-bold text-white">
-                                    <span class="d-block lh-1 mb-4">Subtotal</span>
-                                    <span class="d-block mb-4">Discounts</span>
-                                    <span class="d-block fs-2qx lh-1">Total</span>
+                            <div class="rounded-3 p-6 mb-10 bg-gold">
+                                <div class="d-flex align-items-center justify-content-between my-4">
+                                    <span class="d-block">Total Price</span>
+                                    <span class="d-block" data-kt-pos-element="total_price">$0.00</span>
                                 </div>
-                                <div class="fs-6 fw-bold text-white text-end">
-                                    <span class="d-block lh-1 mb-4" data-kt-pos-element="total">$0.00</span>
-                                    <span class="d-block mb-4 text-danger" data-kt-pos-element="discount"
-                                        id="discount_text">$0.00</span>
-                                    <input type="number" class="form-control d-none" id="discount_input" min="0"
-                                        step="any" placeholder="Enter discount">
-                                    <span class="d-block mb-9" data-kt-pos-element="tax">$0.00</span>
-                                    <span class="d-block fs-2qx lh-1" data-kt-pos-element="grant-total">$0.00</span>
+                                <div class="d-flex align-items-center justify-content-between my-4">
+                                    <span class="d-block">Total Weight</span>
+                                    <span class="d-block" data-kt-pos-element="total_weight">0.00g</span>
                                 </div>
                             </div>
                             <div class="m-0">
-                                <button type="submit" class="btn btn-primary fs-1 w-100 py-4"
-                                    id="complete_order">Complete Order</button>
+                                <button type="submit" class="btn btn-primary fs-1 w-100 py-4" id="create_model">Create
+                                    Model</button>
                             </div>
 
                             <div class="form-group mt-8">
-                                <label for="note" class="form-label">Note</label>
-                                <textarea name="note" id="note" rows="5" class="form-control"></textarea>
+                                <label for="description" class="form-label">Description</label>
+                                <textarea name="description" id="description" rows="5" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

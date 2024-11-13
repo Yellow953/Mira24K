@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->bigInteger('category_id')->unsigned();
 
             $table->string('name');
             $table->string('size');
@@ -36,6 +36,7 @@ return new class extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('reseller_id')->references('id')->on('resellers');
         });
     }

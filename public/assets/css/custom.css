@@ -1,0 +1,8 @@
+.bg-gold {
+    background: rgb(218, 170, 106);
+    background: linear-gradient(
+        90deg,
+        rgba(218, 170, 106, 1) 50%,
+        rgba(157, 113, 57, 1) 100%
+    );
+}
