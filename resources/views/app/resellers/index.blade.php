@@ -52,15 +52,10 @@
                     </div>
                     <div class="col-md-4">
                         <label class="fs-6 form-label fw-bold text-dark">Contact Person</label>
-                        <select class="form-select" name="contact_person">
-                            <option value="">Select Contact Person</option>
-                            @foreach ($contactPersons as $contactPerson)
-                                <option value="{{ $contactPerson }}" {{ request()->query('contact_person') == $contactPerson ? 'selected' : '' }}>
-                                    {{ $contactPerson }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" name="contact_person" value="{{ request()->query('contact_person') }}"
+                            placeholder="Enter Contact Person..." />
                     </div>
+
                     <div class="col-md-4">
                         <label class="fs-6 form-label fw-bold text-dark">Address</label>
                         <input type="text" class="form-control" name="address" value="{{ request()->query('address') }}"
@@ -89,7 +84,7 @@
                             <th class="col-2 p-3">Address</th>
                             <th class="col-2 p-3">GSM</th>
                             <th class="col-2 p-3">Phone</th>
-                            <th class="col-2 p-3">Notes</th>
+
                             <th class="col-2 p-3">Actions</th>
                         </tr>
                     </thead>
@@ -111,7 +106,7 @@
                             <td class="text-center">{{ $reseller->address }}</td>
                             <td class="text-center">{{ $reseller->gsm }}</td>
                             <td class="text-center">{{ $reseller->phone }}</td>
-                            <td class="text-center">{{ $reseller->notes ?? 'N/A' }}</td>
+
                             <td class="d-flex justify-content-end border-0">
                                 <a href="{{ route('resellers.edit', $reseller->id) }}" class="btn btn-icon btn-warning btn-sm me-1">
                                     <i class="bi bi-pen-fill"></i>
