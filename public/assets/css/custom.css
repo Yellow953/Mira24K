@@ -6,3 +6,14 @@
         rgba(157, 113, 57, 1) 100%
     );
 }
+
+.product-img {
+    width: 40%;
+    height: auto;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.product-title {
+    width: 60%;
+}

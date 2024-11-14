@@ -10,7 +10,8 @@
 
 @section('content')
 <div class="card">
-    <form action="{{ route('resellers.update', $reseller->id) }}" method="POST" enctype="multipart/form-data" class="form">
+    <form action="{{ route('resellers.update', $reseller->id) }}" method="POST" enctype="multipart/form-data"
+        class="form">
         @csrf
 
         <div class="card-head pt-10">
@@ -62,15 +63,16 @@
                 <div class="col-md-6">
                     <div class="form-group mt-5">
                         <label class="required form-label">Contact Person</label>
-                        <input type="text" class="form-control" name="contact_person" placeholder="Enter Contact Person..."
-                            value="{{ $reseller->contact_person }}" required />
+                        <input type="text" class="form-control" name="contact_person"
+                            placeholder="Enter Contact Person..." value="{{ $reseller->contact_person }}" required />
                     </div>
                 </div>
             </div>
 
             <div class="form-group mt-5">
                 <label class="form-label">Notes</label>
-                <textarea class="form-control" name="notes" rows="4" placeholder="Enter any additional notes...">{{ $reseller->notes }}</textarea>
+                <textarea class="form-control" name="notes" rows="4"
+                    placeholder="Enter any additional notes...">{{ $reseller->notes }}</textarea>
             </div>
         </div>
 

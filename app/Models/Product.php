@@ -12,45 +12,49 @@ class Product extends Model
 
     protected $guarded = [];
 
-    /**
-     * Relationship with JewelryModel
-     */
     public function jewelryModel()
     {
         return $this->belongsTo(JewelryModel::class);
     }
 
-    /**
-     * Relationship with Category
-     */
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Scope to filter products based on query parameters
-     */
     public function scopeFilter($query)
-{
-    if (request('title')) {
-        $title = request('title');
-        $query->where('title', 'LIKE', "%{$title}%");
-    }
-    if (request('category_name')) {
-        $categoryName = request('category_name');
-        $query->whereHas('category', function ($q) use ($categoryName) {
-            $q->where('name', 'LIKE', "%{$categoryName}%");
-        });
-    }
-    if (request('min_price')) {
-        $query->where('price', '>=', request('min_price'));
-    }
-    if (request('max_price')) {
-        $query->where('price', '<=', request('max_price'));
-    }
+    {
+        if (request('title')) {
+            $title = request('title');
+            $query->where('title', 'LIKE', "%{$title}%");
+        }
+        if (request('mcode')) {
+            $mcode = request('mcode');
+            $query->where('mcode', 'LIKE', "%{$mcode}%");
+        }
+        if (request('karat')) {
+            $karat = request('karat');
+            $query->where('karat', $karat);
+        }
+        if (request('weight')) {
+            $weight = request('weight');
+            $query->where('weight', $weight);
+        }
+        if (request('category_id')) {
+            $category_id = request('category_id');
+            $query->where('category_id', $category_id);
+        }
+        if (request('description')) {
+            $description = request('description');
+            $query->where('description', 'LIKE', "%{$description}%");
+        }
+        if (request('min_price')) {
+            $query->where('price', '>=', request('min_price'));
+        }
+        if (request('max_price')) {
+            $query->where('price', '<=', request('max_price'));
+        }
 
-    return $query;
-}
-
+        return $query;
+    }
 }

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("jewelry_model_id")->unsigned();
+            $table->bigInteger("jewelry_model_id")->unsigned()->nullable();
             $table->bigInteger("category_id")->unsigned();
             $table->string('title');
             $table->string('mcode');
@@ -21,9 +21,9 @@ return new class extends Migration
             $table->text('description')->nullable();
 
             $table->string('image');
-            $table->string('secondary_image_1');
-            $table->string('secondary_image_2');
-            $table->string('secondary_image_3');
+            $table->string('secondary_image_1')->nullable();
+            $table->string('secondary_image_2')->nullable();
+            $table->string('secondary_image_3')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

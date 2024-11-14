@@ -62,15 +62,16 @@
                 <div class="col-md-6">
                     <div class="form-group mt-5">
                         <label class="required form-label">Contact Person</label>
-                        <input type="text" class="form-control" name="contact_person" placeholder="Enter Contact Person..."
-                            value="{{ old('contact_person') }}" required />
+                        <input type="text" class="form-control" name="contact_person"
+                            placeholder="Enter Contact Person..." value="{{ old('contact_person') }}" required />
                     </div>
                 </div>
             </div>
 
             <div class="form-group mt-5">
                 <label class="form-label">Notes</label>
-                <textarea class="form-control" name="notes" rows="4" placeholder="Enter any additional notes...">{{ old('notes') }}</textarea>
+                <textarea class="form-control" name="notes" rows="4"
+                    placeholder="Enter any additional notes...">{{ old('notes') }}</textarea>
             </div>
         </div>
 

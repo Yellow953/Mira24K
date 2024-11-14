@@ -8,13 +8,10 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ProductExport implements FromQuery, WithHeadings
 {
-    /**
-     * Query the products to export, excluding images.
-     */
     public function query()
     {
         return Product::query()->select([
-
+            'category_id',
             'title',
             'mcode',
             'karat',
@@ -23,16 +20,13 @@ class ProductExport implements FromQuery, WithHeadings
             'compare_price',
             'description',
             'created_at',
-
         ]);
     }
 
-    /**
-     * Define the headers for the export.
-     */
     public function headings(): array
     {
         return [
+            'Category',
             'Title',
             'Mcode',
             'Karat',
@@ -41,7 +35,6 @@ class ProductExport implements FromQuery, WithHeadings
             'Compare Price',
             'Description',
             'Created At',
-
         ];
     }
 }

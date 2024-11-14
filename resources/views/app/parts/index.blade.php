@@ -1,25 +1,28 @@
 @extends('app.layouts.app')
 
-@section('title', 'resellers')
+@section('title', 'parts')
 
 @section('actions')
-<a href="{{ route('resellers.new') }}" class="btn btn-sm fw-bold btn-primary">
-    New Reseller
+<a href="{{ route('parts.new') }}" class="btn btn-sm fw-bold btn-primary">
+    New Part
 </a>
-<a href="{{ route('resellers.export') }}" class="btn btn-sm fw-bold btn-primary">
-    Export Resellers
+<a href="{{ route('parts.export') }}" class="btn btn-sm fw-bold btn-primary">
+    Export Parts
 </a>
 @endsection
 
 @section('filter')
 <!--begin::filter-->
 <div class="filter border-0 px-0 px-md-3 py-4">
-    <form action="{{ route('resellers') }}" method="GET" enctype="multipart/form-data" class="form">
+    <!--begin::Form-->
+    <form action="{{ route('parts') }}" method="GET" enctype="multipart/form-data" class="form">
         @csrf
-
         <div class="pt-0 pt-3 px-2 px-md-4">
+            <!--begin::Compact form-->
             <div class="d-flex align-items-center">
+                <!--begin::Input group-->
                 <div class="position-relative w-md-400px me-md-2">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                     <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
@@ -29,9 +32,12 @@
                                 fill="currentColor" />
                         </svg>
                     </span>
+                    <!--end::Svg Icon-->
                     <input type="text" class="form-control ps-10" name="name" value="{{ request()->query('name') }}"
                         placeholder="Search By Name..." />
                 </div>
+                <!--end::Input group-->
+                <!--begin:Action-->
                 <div class="d-flex align-items-center">
                     <button type="submit" class="btn btn-primary me-5 px-3 py-2 d-flex align-items-center">
                         <span class="mx-2">Search</span>
@@ -41,31 +47,26 @@
                         href="#kt_advanced_search_form">Advanced Search</a>
                     <button type="reset" class="btn text-danger clear-btn">Clear</button>
                 </div>
+                <!--end:Action-->
             </div>
+            <!--end::Compact form-->
+            <!--begin::Advance form-->
             <div class="collapse" id="kt_advanced_search_form">
                 <div class="separator separator-dashed mt-9 mb-6"></div>
                 <div class="row g-8 mb-8">
-                    <div class="col-md-4">
-                        <label class="fs-6 form-label fw-bold text-dark">Email</label>
-                        <input type="email" class="form-control" name="email" value="{{ request()->query('email') }}"
-                            placeholder="Enter Email..." />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="fs-6 form-label fw-bold text-dark">Contact Person</label>
-                        <input type="text" class="form-control" name="contact_person"
-                            value="{{ request()->query('contact_person') }}" placeholder="Enter Contact Person..." />
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="fs-6 form-label fw-bold text-dark">Address</label>
-                        <input type="text" class="form-control" name="address" value="{{ request()->query('address') }}"
-                            placeholder="Enter Address..." />
+                    <div class="col-md-12">
+                        <label class="fs-6 form-label fw-bold text-dark">Group</label>
+                        <input type="text" class="form-control" name="group" value="{{ request()->query('group') }}"
+                            placeholder="Enter Group..." />
                     </div>
                 </div>
             </div>
+            <!--end::Advance form-->
         </div>
     </form>
+    <!--end::Form-->
 </div>
+<!--end::filter-->
 @endsection
 
 @section('content')
@@ -78,52 +79,38 @@
                 <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                     <thead>
                         <tr class="text-center">
-                            <th class="col-2 p-3">Reseller</th>
-                            <th class="col-2 p-3">Email</th>
-                            <th class="col-2 p-3">Contact Person</th>
-                            <th class="col-2 p-3">Address</th>
-                            <th class="col-2 p-3">GSM</th>
-                            <th class="col-2 p-3">Phone</th>
-
+                            <th class="col-2 p-3">Name</th>
+                            <th class="col-2 p-3">Size</th>
+                            <th class="col-2 p-3">Weight</th>
+                            <th class="col-2 p-3">Price (USD)</th>
+                            <th class="col-2 p-3">Category</th>
                             <th class="col-2 p-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($resellers as $reseller)
+                        @forelse ($parts as $part)
                         <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-45px me-5">
-                                        <img alt="reseller" src="{{ asset('assets/images/default_profile.png') }}" />
-                                    </div>
-                                    <div class="d-flex justify-content-start flex-column">
-                                        <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{
-                                            ucwords($reseller->name) }}</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">{{ $reseller->email }}</td>
-                            <td class="text-center">{{ $reseller->contact_person }}</td>
-                            <td class="text-center">{{ $reseller->address }}</td>
-                            <td class="text-center">{{ $reseller->gsm }}</td>
-                            <td class="text-center">{{ $reseller->phone }}</td>
-
+                            <td>{{ $part->name }}</td>
+                            <td>{{ $part->size }}</td>
+                            <td>{{ $part->gr_pcs }}</td>
+                            <td>{{ $part->dollar_pcs }}</td>
+                            <td>{{ $part->group }}</td>
                             <td class="d-flex justify-content-end border-0">
-                                <a href="{{ route('resellers.edit', $reseller->id) }}"
+                                <a href="{{ route('parts.edit', $part->id) }}"
                                     class="btn btn-icon btn-warning btn-sm me-1">
                                     <i class="bi bi-pen-fill"></i>
                                 </a>
-                                <a href="{{ route('resellers.destroy', $reseller->id) }}"
+                                <a href="{{ route('parts.destroy', $part->id) }}"
                                     class="btn btn-icon btn-danger btn-sm show_confirm" data-toggle="tooltip"
-                                    data-original-title="Delete Reseller">
+                                    data-original-title="Delete Part">
                                     <i class="bi bi-trash3-fill"></i>
                                 </a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <th colspan="8">
-                                <div class="text-center">No Resellers Yet ...</div>
+                            <th colspan="6">
+                                <div class="text-center">No Parts Found...</div>
                             </th>
                         </tr>
                         @endforelse
@@ -131,10 +118,9 @@
 
                     <tfoot>
                         <tr>
-                            <th colspan="8">
-                                {{ $resellers->appends(['name' => request()->query('name'), 'email' =>
-                                request()->query('email'), 'contact_person' => request()->query('contact_person'),
-                                'address' => request()->query('address')])->links() }}
+                            <th colspan="6">
+                                {{ $parts->appends(['name' => request()->query('name'), 'group' =>
+                                request()->query('group')])->links() }}
                             </th>
                         </tr>
                     </tfoot>

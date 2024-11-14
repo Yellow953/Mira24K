@@ -6,8 +6,5 @@ use Illuminate\Database\Seeder;
 
 class ResellerSeeder extends Seeder
 {
-    public function run(): void
-    {
-        //
-    }
+    public function run(): void {}
 }

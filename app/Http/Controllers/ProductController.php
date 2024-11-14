@@ -4,37 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Exports\ProductExport;
 use App\Models\Category;
-use App\Models\JewelryModel;
 use App\Models\Log;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::select('id', 'title', 'price', 'category_id', 'jewelry_model_id')
-            ->orderBy('id', 'desc')
-            ->paginate(25);
+        $products = Product::select('id', 'title', 'mcode', 'price', 'category_id', 'karat', 'weight', 'image')->filter()->orderBy('id', 'desc')->paginate(25);
+        $categories = Category::select('id', 'name')->where('type', 'products')->get();
 
-        return view('app.products.index', compact('products'));
+        $data = compact('products', 'categories');
+        return view('app.products.index', $data);
     }
 
     public function new()
     {
+        $categories = Category::select('id', 'name')->where('type', 'products')->get();
 
-        $jewelryModels = JewelryModel::all();
-        $categories = Category::all();
-
-        return view('app.products.new', compact('jewelryModels', 'categories'));
+        return view('app.products.new', compact('categories'));
     }
 
     public function create(Request $request)
     {
         $request->validate([
-            'jewelry_model_id' => 'required|exists:jewelry_models,id',
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:255',
             'mcode' => 'required|string|max:255|unique:products',
@@ -50,10 +45,39 @@ class ProductController extends Controller
         ]);
 
         $productData = $request->all();
-        $productData['image'] = $request->file('image')->store('images', 'public');
-        $productData['secondary_image_1'] = $request->file('secondary_image_1')->store('images', 'public');
-        $productData['secondary_image_2'] = $request->file('secondary_image_2')->store('images', 'public');
-        $productData['secondary_image_3'] = $request->file('secondary_image_3')->store('images', 'public');
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $image_path = '/uploads/products/' . $filename;
+            $productData['image'] = $image_path;
+        }
+        if ($request->hasFile('secondary_image_1')) {
+            $file = $request->file('secondary_image_1');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $secondary_image_1_path = '/uploads/products/' . $filename;
+            $productData['secondary_image_1'] = $secondary_image_1_path;
+        }
+        if ($request->hasFile('secondary_image_2')) {
+            $file = $request->file('secondary_image_2');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $secondary_image_2_path = '/uploads/products/' . $filename;
+            $productData['secondary_image_2'] = $secondary_image_2_path;
+        }
+        if ($request->hasFile('secondary_image_3')) {
+            $file = $request->file('secondary_image_3');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $secondary_image_3_path = '/uploads/products/' . $filename;
+            $productData['secondary_image_3'] = $secondary_image_3_path;
+        }
 
         $product = Product::create($productData);
 
@@ -66,17 +90,15 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $jewelryModels = JewelryModel::all();
-        $categories = Category::all();
-        $data = compact('product', 'jewelryModels', 'categories');
+        $categories = Category::select('id', 'name')->where('type', 'products')->get();
 
+        $data = compact('product', 'categories');
         return view('app.products.edit', $data);
     }
 
     public function update(Product $product, Request $request)
     {
         $request->validate([
-            'jewelry_model_id' => 'required|exists:jewelry_models,id',
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:255',
             'mcode' => 'required|string|max:255|unique:products,mcode,' . $product->id,
@@ -92,24 +114,47 @@ class ProductController extends Controller
         ]);
 
         $updatedData = $request->only([
-            'jewelry_model_id', 'category_id', 'title', 'mcode', 'karat', 'weight', 'price', 'compare_price', 'description'
+            'category_id',
+            'title',
+            'mcode',
+            'karat',
+            'weight',
+            'price',
+            'compare_price',
+            'description'
         ]);
 
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($product->image);
-            $updatedData['image'] = $request->file('image')->store('images', 'public');
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $image_path = '/uploads/products/' . $filename;
+            $updatedData['image'] = $image_path;
         }
         if ($request->hasFile('secondary_image_1')) {
-            Storage::disk('public')->delete($product->secondary_image_1);
-            $updatedData['secondary_image_1'] = $request->file('secondary_image_1')->store('images', 'public');
+            $file = $request->file('secondary_image_1');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $secondary_image_1_path = '/uploads/products/' . $filename;
+            $updatedData['secondary_image_1'] = $secondary_image_1_path;
         }
         if ($request->hasFile('secondary_image_2')) {
-            Storage::disk('public')->delete($product->secondary_image_2);
-            $updatedData['secondary_image_2'] = $request->file('secondary_image_2')->store('images', 'public');
+            $file = $request->file('secondary_image_2');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $secondary_image_2_path = '/uploads/products/' . $filename;
+            $updatedData['secondary_image_2'] = $secondary_image_2_path;
         }
         if ($request->hasFile('secondary_image_3')) {
-            Storage::disk('public')->delete($product->secondary_image_3);
-            $updatedData['secondary_image_3'] = $request->file('secondary_image_3')->store('images', 'public');
+            $file = $request->file('secondary_image_3');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('uploads/products/', $filename);
+            $secondary_image_3_path = '/uploads/products/' . $filename;
+            $updatedData['secondary_image_3'] = $secondary_image_3_path;
         }
 
         $product->update($updatedData);

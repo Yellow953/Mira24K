@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('category_id')->unsigned();
 
+            // clasps and semiparts
             $table->string('name');
             $table->string('size');
             $table->double('gr_pcs');
@@ -22,7 +23,6 @@ return new class extends Migration
             $table->bigInteger("reseller_id")->unsigned();
             $table->string('reseller_barcode');
             $table->string('image');
-
 
             // stones
             $table->boolean('faceted')->nullable();
