@@ -42,6 +42,7 @@ class ProductController extends Controller
             'secondary_image_1' => 'nullable|image',
             'secondary_image_2' => 'nullable|image',
             'secondary_image_3' => 'nullable|image',
+
         ]);
 
         $productData = $request->all();

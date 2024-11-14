@@ -21,23 +21,34 @@ class Part extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // Filter
     public function scopeFilter($q)
-    {
-        if (request('category_id')) {
-            $category_id = request('category_id');
-            $q->where('category_id', $category_id);
-        }
-        if (request('name')) {
-            $name = request('name');
-            $q->where('name', 'LIKE', "%{$name}%");
-        }
-        if (request('reseller_id')) {
-            $reseller_id = request('reseller_id');
-            $q->where('reseller_id', $reseller_id);
-        }
-
-
-        return $q;
+{
+    if (request('category_id')) {
+        $q->where('category_id', request('category_id'));
     }
+    if (request('name')) {
+        $q->where('name', 'LIKE', '%' . request('name') . '%');
+    }
+    if (request('reseller_id')) {
+        $q->where('reseller_id', request('reseller_id'));
+    }
+    if (request('size')) {
+        $q->where('size', request('size'));
+    }
+    if (request('color')) {
+        $q->where('color', request('color'));
+    }
+    if (request('faceted') !== null) {
+        $q->where('faceted', request('faceted'));
+    }
+    if (request('group')) {
+        $q->where('group', 'LIKE', '%' . request('group') . '%');
+    }
+    if (request('thickness_min') && request('thickness_max')) {
+        $q->whereBetween('thickness', [request('thickness_min'), request('thickness_max')]);
+    }
+
+    return $q;
+}
+
 }

@@ -82,7 +82,7 @@ class PartController extends Controller
         $resellers = Reseller::select('id', 'name')->get();
 
         $data = compact('categories', 'part', 'resellers');
-        return view('parts.edit', $data);
+        return view('app.parts.edit', $data);
     }
 
     public function update(Request $request, Part $part)

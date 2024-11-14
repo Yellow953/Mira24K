@@ -10,24 +10,27 @@ class ProductExport implements FromQuery, WithHeadings
 {
     public function query()
     {
-        return Product::query()->select([
-            'category_id',
-            'title',
-            'mcode',
-            'karat',
-            'weight',
-            'price',
-            'compare_price',
-            'description',
-            'created_at',
-        ]);
+        return Product::query()
+            ->with('category')
+            ->select([
+                'category_id',
+                'title',
+                'mcode',
+                'karat',
+                'weight',
+                'price',
+                'compare_price',
+                'description',
+                'created_at',
+            ]);
     }
 
     public function headings(): array
     {
         return [
-            'Category',
+
             'Title',
+            'Category',
             'Mcode',
             'Karat',
             'Weight',
@@ -35,6 +38,22 @@ class ProductExport implements FromQuery, WithHeadings
             'Compare Price',
             'Description',
             'Created At',
+        ];
+    }
+
+    public function map($product): array
+    {
+        return [
+
+            $product->title,
+            $product->category ? $product->category->name : '',
+            $product->mcode,
+            $product->karat,
+            $product->weight,
+            $product->price,
+            $product->compare_price,
+            $product->description,
+            $product->created_at,
         ];
     }
 }
