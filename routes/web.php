@@ -39,12 +39,11 @@ Route::middleware(['auth'])->group(function () {
         // Parts
         Route::prefix('parts')->group(function () {
             Route::get('/export', [PartController::class, 'export'])->name('parts.export');
-            Route::get('/new', [PartController::class, 'new'])->name('parts.new');
             Route::post('/create', [PartController::class, 'create'])->name('parts.create');
-            Route::get('/edit/{part}', [PartController::class, 'edit'])->name('parts.edit');
-            Route::post('/update/{part}', [PartController::class, 'update'])->name('parts.update');
             Route::get('/delete/{part}', [PartController::class, 'destroy'])->name('parts.destroy');
             Route::get('/', [PartController::class, 'index'])->name('parts');
+            Route::get('/show/{part}', [PartController::class, 'show'])->name('parts.show');
+
         });
 
         // Jewelry Models

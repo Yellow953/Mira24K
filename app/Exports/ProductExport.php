@@ -5,30 +5,18 @@ namespace App\Exports;
 use App\Models\Product;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ProductExport implements FromQuery, WithHeadings
+class ProductExport implements FromQuery, WithHeadings, WithMapping
 {
     public function query()
     {
-        return Product::query()
-            ->with('category')
-            ->select([
-                'category_id',
-                'title',
-                'mcode',
-                'karat',
-                'weight',
-                'price',
-                'compare_price',
-                'description',
-                'created_at',
-            ]);
+        return Product::query()->with('category'); // Load the category relationship
     }
 
     public function headings(): array
     {
         return [
-
             'Title',
             'Category',
             'Mcode',
@@ -44,9 +32,8 @@ class ProductExport implements FromQuery, WithHeadings
     public function map($product): array
     {
         return [
-
             $product->title,
-            $product->category ? $product->category->name : '',
+            $product->category ? $product->category->name : '', // Fetch category name
             $product->mcode,
             $product->karat,
             $product->weight,
@@ -57,3 +44,4 @@ class ProductExport implements FromQuery, WithHeadings
         ];
     }
 }
+

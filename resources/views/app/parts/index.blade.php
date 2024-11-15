@@ -3,9 +3,7 @@
 @section('title', 'parts')
 
 @section('actions')
-<a href="{{ route('parts.new') }}" class="btn btn-sm fw-bold btn-primary">
-    New Part
-</a>
+
 <a href="{{ route('parts.export') }}" class="btn btn-sm fw-bold btn-primary">
     Export Parts
 </a>
@@ -54,10 +52,65 @@
             <div class="collapse" id="kt_advanced_search_form">
                 <div class="separator separator-dashed mt-9 mb-6"></div>
                 <div class="row g-8 mb-8">
-                    <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label class="fs-6 form-label fw-bold text-dark">Category</label>
+                        <select class="form-select" name="category_id">
+                            <option value="">Choose Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ request()->query('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fs-6 form-label fw-bold text-dark">Reseller</label>
+                        <select class="form-select" name="reseller_id">
+                            <option value="">Choose Reseller</option>
+                            @foreach($resellers as $reseller)
+                                <option value="{{ $reseller->id }}" {{ request()->query('reseller_id') == $reseller->id ? 'selected' : '' }}>
+                                    {{ $reseller->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fs-6 form-label fw-bold text-dark">Size</label>
+                        <input type="text" class="form-control" name="size" value="{{ request()->query('size') }}"
+                            placeholder="Enter Size..." />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fs-6 form-label fw-bold text-dark">Color</label>
+                        <input type="text" class="form-control" name="color" value="{{ request()->query('color') }}"
+                            placeholder="Enter Color..." />
+                    </div>
+
+                    <div class="col-md-4">
                         <label class="fs-6 form-label fw-bold text-dark">Group</label>
                         <input type="text" class="form-control" name="group" value="{{ request()->query('group') }}"
                             placeholder="Enter Group..." />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fs-6 form-label fw-bold text-dark">Faceted</label>
+                        <select class="form-select" name="faceted">
+                            <option value="">Choose Option</option>
+                            <option value="1" {{ request()->query('faceted') === '1' ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ request()->query('faceted') === '0' ? 'selected' : '' }}>No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fs-6 form-label fw-bold text-dark">Thickness Range</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" class="form-control" name="thickness_min"
+                                value="{{ request()->query('thickness_min') }}" placeholder="Min" step="0.01" />
+                            <input type="number" class="form-control" name="thickness_max"
+                                value="{{ request()->query('thickness_max') }}" placeholder="Max" step="0.01" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,9 +163,9 @@
                             <td>{{ $part->mcode }}</td>
                             <td>{{ $part->size }}</td>
                             <td class="d-flex justify-content-end border-0">
-                                <a href="{{ route('parts.edit', $part->id) }}"
-                                    class="btn btn-icon btn-warning btn-sm me-1">
-                                    <i class="bi bi-pen-fill"></i>
+                                <a href="{{ route('parts.show', $part->id) }}"
+                                    class="btn btn-primary btn-sm" data-toggle="tooltip">
+                                    <i class="fas fa-image"></i>
                                 </a>
                                 <a href="{{ route('parts.destroy', $part->id) }}"
                                     class="btn btn-icon btn-danger btn-sm show_confirm" data-toggle="tooltip"
