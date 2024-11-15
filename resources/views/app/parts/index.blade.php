@@ -76,25 +76,39 @@
 
         <div class="card-body pt-3">
             <div class="table-responsive">
-                <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                <table class="table table-row-dashed table-row-gray-300 align-middle text-center gs-0 gy-4">
                     <thead>
                         <tr class="text-center">
-                            <th class="col-2 p-3">Name</th>
-                            <th class="col-2 p-3">Size</th>
-                            <th class="col-2 p-3">Weight</th>
-                            <th class="col-2 p-3">Price (USD)</th>
-                            <th class="col-2 p-3">Category</th>
-                            <th class="col-2 p-3">Actions</th>
+                            <th class="col-2 text-bold p-3">Category</th>
+                            <th class="col-2 text-bold p-3">Part</th>
+                            <th class="col-2 text-bold p-3">Reseller</th>
+                            <th class="col-2 text-bold p-3">MCode</th>
+                            <th class="col-2 text-bold p-3">Size</th>
+                            <th class="col-2 text-bold p-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($parts as $part)
                         <tr>
-                            <td>{{ $part->name }}</td>
+                            <td>{{ ucwords($part->category->name) }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-45px me-5">
+                                        <img src="{{ asset($part->image) }}" />
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Name-->
+                                    <div class="d-flex justify-content-start flex-column">
+                                        <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{
+                                            ucwords($part->name) }}</a>
+                                    </div>
+                                    <!--end::Name-->
+                                </div>
+                            </td>
+                            <td>{{ ucwords($part->reseller->name) }}</td>
+                            <td>{{ $part->mcode }}</td>
                             <td>{{ $part->size }}</td>
-                            <td>{{ $part->gr_pcs }}</td>
-                            <td>{{ $part->dollar_pcs }}</td>
-                            <td>{{ $part->group }}</td>
                             <td class="d-flex justify-content-end border-0">
                                 <a href="{{ route('parts.edit', $part->id) }}"
                                     class="btn btn-icon btn-warning btn-sm me-1">

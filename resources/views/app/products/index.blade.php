@@ -95,16 +95,16 @@
 
         <div class="card-body pt-3">
             <div class="table-responsive">
-                <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                <table class="table table-row-dashed table-row-gray-300 align-middle text-center gs-0 gy-4">
                     <thead>
                         <tr class="text-center">
-                            <th class="col-2 p-3">Category</th>
-                            <th class="col-2 p-3">Product</th>
-                            <th class="col-1 p-3">MCode</th>
-                            <th class="col-1 p-3">Karat</th>
-                            <th class="col-1 p-3">Weight (g)</th>
-                            <th class="col-1 p-3">Price</th>
-                            <th class="col-2 p-3">Actions</th>
+                            <th class="col-2 text-bold p-3">Category</th>
+                            <th class="col-2 text-bold p-3">Product</th>
+                            <th class="col-1 text-bold p-3">MCode</th>
+                            <th class="col-1 text-bold p-3">Karat</th>
+                            <th class="col-1 text-bold p-3">Weight (g)</th>
+                            <th class="col-1 text-bold p-3">Price</th>
+                            <th class="col-2 text-bold p-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,19 +112,24 @@
                         <tr>
                             <td>{{ ucwords($product->category->name) }}</td>
                             <td>
-                                <div class="d-flex">
-                                    <div class="product-img">
-                                        <img src="{{ asset($product->image) }}" class="img-fluid">
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Image-->
+                                    <div class="symbol symbol-45px me-5">
+                                        <img src="{{ asset($product->image) }}" />
                                     </div>
-                                    <div class="product-title">
-                                        {{ ucwords($product->title) }}
+                                    <!--end::Image-->
+                                    <!--begin::Title-->
+                                    <div class="d-flex justify-content-start flex-column">
+                                        <a href="#" class="text-dark fw-bold text-hover-primary mb-1 fs-6">{{
+                                            ucwords($product->title) }}</a>
                                     </div>
+                                    <!--end::Title-->
                                 </div>
                             </td>
                             <td>{{ $product->mcode }}</td>
                             <td>{{ $product->karat }}</td>
                             <td>{{ $product->weight }}</td>
-                            <td>{{ $product->price }}</td>
+                            <td>${{ number_format($product->price, 2) }}</td>
                             <td class="d-flex justify-content-end border-0">
                                 <a href="{{ route('products.edit', $product->id) }}"
                                     class="btn btn-icon btn-warning btn-sm me-1">

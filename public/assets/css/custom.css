@@ -7,13 +7,6 @@
     );
 }
 
-.product-img {
-    width: 40%;
-    height: auto;
-    border-radius: 25px;
-    overflow: hidden;
-}
-
-.product-title {
-    width: 60%;
+.text-bold {
+    font-weight: bold !important;
 }

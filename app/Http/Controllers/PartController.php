@@ -14,7 +14,7 @@ class PartController extends Controller
 {
     public function index()
     {
-        $parts = Part::select('category_id', 'reseller_id', 'image', 'name', 'mcode')->filter()->orderBy('id', 'desc')->paginate(25);
+        $parts = Part::select('id', 'image', 'name', 'mcode', 'category_id', 'reseller_id', 'size')->filter()->orderBy('id', 'desc')->paginate(25);
         $categories = Category::select('id', 'name')->where('type', 'parts')->get();
         $resellers = Reseller::select('id', 'name')->get();
 

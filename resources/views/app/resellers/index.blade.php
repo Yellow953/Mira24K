@@ -45,18 +45,18 @@
             <div class="collapse" id="kt_advanced_search_form">
                 <div class="separator separator-dashed mt-9 mb-6"></div>
                 <div class="row g-8 mb-8">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label class="fs-6 form-label fw-bold text-dark">Email</label>
                         <input type="email" class="form-control" name="email" value="{{ request()->query('email') }}"
                             placeholder="Enter Email..." />
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label class="fs-6 form-label fw-bold text-dark">Contact Person</label>
                         <input type="text" class="form-control" name="contact_person"
                             value="{{ request()->query('contact_person') }}" placeholder="Enter Contact Person..." />
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <label class="fs-6 form-label fw-bold text-dark">Address</label>
                         <input type="text" class="form-control" name="address" value="{{ request()->query('address') }}"
                             placeholder="Enter Address..." />
@@ -78,14 +78,13 @@
                 <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                     <thead>
                         <tr class="text-center">
-                            <th class="col-2 p-3">Reseller</th>
-                            <th class="col-2 p-3">Email</th>
-                            <th class="col-2 p-3">Contact Person</th>
-                            <th class="col-2 p-3">Address</th>
-                            <th class="col-2 p-3">GSM</th>
-                            <th class="col-2 p-3">Phone</th>
-
-                            <th class="col-2 p-3">Actions</th>
+                            <th class="col-2 text-bold p-3">Reseller</th>
+                            <th class="col-2 text-bold p-3">Email</th>
+                            <th class="col-2 text-bold p-3">Contact Person</th>
+                            <th class="col-2 text-bold p-3">Address</th>
+                            <th class="col-2 text-bold p-3">GSM</th>
+                            <th class="col-2 text-bold p-3">Phone</th>
+                            <th class="col-2 text-bold p-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>

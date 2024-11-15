@@ -90,9 +90,9 @@
                     <!--begin::Table head-->
                     <thead>
                         <tr class="text-center">
-                            <th class="col-2 p-3">User</th>
-                            <th class="col-2 p-3">Contact</th>
-                            <th class="col-2 p-3">Actions</th>
+                            <th class="col-3 text-bold p-3">User</th>
+                            <th class="col-3 text-bold p-3">Contact</th>
+                            <th class="col-3 text-bold p-3">Actions</th>
                         </tr>
                     </thead>
                     <!--end::Table head-->
