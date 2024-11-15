@@ -8,18 +8,19 @@
         <div class="d-flex flex-column flex-xl-row">
             <!-- Main content with product categories and items -->
             <div class="d-flex flex-row-fluid justify-content-center mb-10 mb-xl-0">
-                <div class="card card-p-0 p-5 mx-3 border-0">
+                <div class="card card-p-0 p-5 mx-3 border-0 diamond-bg"
+                    style="background-image: url({{ asset('assets/images/diamond.png') }})">
                     <div class="card-body">
                         <div class="mb-5">
-                            <input type="text" id="product_search" class="form-control"
-                                placeholder="Search Products by Name...">
+                            <input type="text" id="parts_search" class="form-control"
+                                placeholder="Search Parts by Name...">
                         </div>
 
                         <ul
                             class="nav nav-pills d-flex justify-content-between nav-pills-custom flex-nowrap overflow-x-auto gap-3 mb-6">
                             @foreach ($categories as $category)
                             <li class="nav-item mb-3 me-0">
-                                <a class="nav-link nav-link-border-solid btn btn-outline btn-active-color-primary flex-column flex-stack py-5 page-bg {{ $loop->first ? 'active show' : '' }}"
+                                <a class="nav-link nav-link-border-solid btn btn-outline btn-active-color-primary flex-column flex-stack py-5 page-bg bg-white {{ $loop->first ? 'active show' : '' }}"
                                     data-bs-toggle="pill" href="#kt_pos_food_content_{{ $category->id }}"
                                     style="width: 125px;height: 125px">
                                     <div class="nav-icon mb-3">
@@ -40,10 +41,10 @@
                                 id="kt_pos_food_content_{{ $category->id }}">
                                 <div class="d-flex flex-wrap d-grid gap-3">
                                     @forelse ($category->parts as $part)
-                                    <div class="card card-flush flex-row-fluid p-0 pb-5 mw-100 border-custom product-item"
-                                        data-product-id="{{ $part->id }}">
+                                    <div class="card card-flush flex-row-fluid p-0 pb-5 mw-100 border-custom part-item"
+                                        data-part-id="{{ $part->id }}">
                                         <div class="card-body text-center">
-                                            <img src="{{ asset($part->image) }}" class="rounded-3 mb-4 w-150px h-150px"
+                                            <img src="{{ asset($part->image) }}" class="p-4" width="150" height="150"
                                                 alt="{{ $part->name }}" />
                                             <div class="mb-2">
                                                 <div class="text-center">
@@ -129,4 +130,5 @@
     </div>
 </div>
 
+@include('app.scripts.dashboard')
 @endsection

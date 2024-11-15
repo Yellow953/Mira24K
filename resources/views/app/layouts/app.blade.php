@@ -84,6 +84,11 @@
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
+    {{-- Sweet Alert --}}
+    <script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
+
+    <script src="{{ asset('assets/js/script.js') }}"></script>
     <!--end::Javascript-->
 </body>
 <!--end::Body-->

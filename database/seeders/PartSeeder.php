@@ -11,7 +11,7 @@ class PartSeeder extends Seeder
     {
         $parts = [
             [
-                'category_id' => 1,
+                'category_id' => 6,
                 'name' => 'Sample Part 1',
                 'size' => 'Medium',
                 'gr_pcs' => 1.5,
@@ -32,7 +32,7 @@ class PartSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'category_id' => 2,
+                'category_id' => 7,
                 'name' => 'Sample Part 2',
                 'size' => 'Large',
                 'gr_pcs' => 2.0,

@@ -12,7 +12,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 // Auth
 Route::middleware(['auth'])->group(function () {
@@ -23,12 +23,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/save_password', [ProfileController::class, 'save_password'])->name('profile.save_password');
             Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
             Route::get('/', [ProfileController::class, 'show'])->name('profile');
-        });
-
-        // Settings
-        Route::prefix('settings')->group(function () {
-            Route::post('/update', [SettingsController::class, 'update'])->name('settings.update');
-            Route::get('/', [SettingsController::class, 'show'])->name('settings');
         });
 
         // Users
@@ -90,6 +84,33 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('logs')->group(function () {
             Route::get('/export', [LogController::class, 'export'])->name('logs.export');
             Route::get('/', [LogController::class, 'index'])->name('logs');
+        });
+
+        // Settings
+        Route::prefix('settings')->group(function () {
+            // Backup
+            Route::prefix('backup')->group(function () {
+                Route::get('/export', [SettingsController::class, 'backup_export'])->name('settings.backup.export');
+                Route::post('/import', [SettingsController::class, 'backup_import'])->name('settings.backup.import');
+            });
+
+            // Categories
+            Route::prefix('categories')->group(function () {
+                // Parts
+                Route::prefix('parts')->group(function () {
+                    Route::post('/create', [SettingsController::class, 'create_parts_category'])->name('settings.categories.parts.create');
+                });
+
+                // Products
+                Route::prefix('products')->group(function () {
+                    Route::post('/create', [SettingsController::class, 'create_products_category'])->name('settings.categories.products.create');
+                });
+
+                Route::get('/destroy/{category}', [SettingsController::class, 'destroy_category'])->name('settings.categories.destroy');
+            });
+
+            Route::post('/profit/update', [SettingsController::class, 'update_profit'])->name('settings.update_profit');
+            Route::get('/', [SettingsController::class, 'index'])->name('settings');
         });
 
         // App
